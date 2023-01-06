@@ -1,11 +1,9 @@
 package ru.hogwarts.school.service;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.hogwarts.school.exception.StudentNotFoundException;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -40,6 +38,10 @@ public class StudentService {
 
     public Collection<Student> getStudentsByAge(int age) {
         return studentRepository.findByAge(age);
+    }
+
+    public Collection<Student> findStudentByAge(int minAge, int maxAge) {
+        return studentRepository.findByAgeBetween(minAge,maxAge);
     }
 }
 

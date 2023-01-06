@@ -28,6 +28,15 @@ public class FacultyController {
         return facultyService.getFaculty(id);
     }
 
+    @GetMapping("/color/{color}")
+    public Collection <Faculty> getFacultyByColor(@PathVariable("color") String color){
+        return facultyService.getFacultyByColor(color);
+    }
+
+    @GetMapping("/search/{nameOrColor}")
+    public Faculty findByNameOrColor(@PathVariable("nameOrColor") String nameOrColor){
+        return facultyService.findByNameOrColor(nameOrColor);
+    }
     @PostMapping
     public  Faculty createFaculty(@RequestBody Faculty faculty){
         return facultyService.addFaculty(faculty);
@@ -44,9 +53,5 @@ public class FacultyController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/color/{color}")
-    public Collection <Faculty> getFacultyByColor(@PathVariable("color") String color){
-        return facultyService.getFacultyByColor(color);
-    }
 
 }

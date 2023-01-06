@@ -4,14 +4,8 @@ import org.springframework.stereotype.Service;
 import ru.hogwarts.school.exception.FacultyNotFoundException;
 import ru.hogwarts.school.exception.StudentNotFoundException;
 import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
-
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Collection;;
 
 @Service
 public class FacultyService {
@@ -46,4 +40,8 @@ public class FacultyService {
         return facultyRepository.findByColor(color);
     }
 
+    public Faculty findByNameOrColor(String nameOrColor){
+        return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(nameOrColor,nameOrColor)
+                .orElseThrow(FacultyNotFoundException::new);
+    }
 }
