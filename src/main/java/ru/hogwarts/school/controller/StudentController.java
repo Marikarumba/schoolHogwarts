@@ -1,11 +1,19 @@
 package ru.hogwarts.school.controller;
 
+import java.util.Collection;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
-import java.util.Collection;
 
 @RestController
 @RequestMapping("/student")
@@ -13,7 +21,8 @@ public class StudentController {
 
     private final StudentService studentService;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService)
+    {
         this.studentService = studentService;
     }
 
@@ -39,7 +48,6 @@ public class StudentController {
         return studentService.findStudentByAge(minAge,maxAge);
     }
 
-
     @PostMapping
     public  Student createStudent(@RequestBody Student student){
         return studentService.addStudent(student);
@@ -55,5 +63,6 @@ public class StudentController {
         studentService.removeStudent(id);
         return ResponseEntity.noContent().build();
     }
+
 
 }
