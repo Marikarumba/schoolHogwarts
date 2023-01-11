@@ -6,6 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.model.Avatar;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.AvatarRepository;
+import ru.hogwarts.school.repository.StudentRepository;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,12 +21,14 @@ public class AvatarService {
     private String avatarsDir;
 
     private final AvatarRepository avatarRepository;
+
     private final StudentService studentService;
 
     public AvatarService(AvatarRepository avatarRepository, StudentService studentService) {
         this.avatarRepository = avatarRepository;
         this.studentService = studentService;
     }
+
 
     public Avatar findAvatar(long studentId) {
         return avatarRepository.findByStudentId(studentId).orElseThrow();
