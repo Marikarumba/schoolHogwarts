@@ -1,5 +1,7 @@
 package ru.hogwarts.school.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,8 @@ public class AvatarService {
 
     private final StudentService studentService;
 
+    Logger logger = LoggerFactory.getLogger(AvatarService.class);
+
     public AvatarService(AvatarRepository avatarRepository, StudentService studentService) {
         this.avatarRepository = avatarRepository;
         this.studentService = studentService;
@@ -33,6 +37,7 @@ public class AvatarService {
 
 
     public Avatar findAvatar(long studentId) {
+        logger.info("the following method was called: findAvatar");
         return avatarRepository.findByStudentId(studentId).orElseThrow();
     }
 
@@ -59,15 +64,18 @@ public class AvatarService {
         avatar.setData(file.getBytes());
 
         avatarRepository.save(avatar);
+        logger.info("the following method was called: uploadAvatar");
     }
 
     public Collection<Avatar> getAvatarPage(int pageNumber, int pageSize){
-        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+        PageRequest pageRequest = PageRequest.of(pageNumber-1, pageSize);
+        logger.info("the following method was called: getAvatarPage");
         return avatarRepository.findAll(pageRequest).stream().collect(Collectors.toList());
     }
 
 
     private String getExtension(String fileName) {
+        logger.info("the following method was called: getExtension");
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 }
