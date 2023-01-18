@@ -79,5 +79,15 @@ public class StudentController {
         return studentService.getLastStudent();
     }
 
+    @GetMapping("/NameSorted")
+    public Collection<String> getSortedNameStudent() {
+        return studentService.getSortedNameStudent();
+    }
+
+    @GetMapping("/AvgeAge")
+    public Double getAverageAge() {
+        return studentService.getAvgAge();
+    }
+
 
 }

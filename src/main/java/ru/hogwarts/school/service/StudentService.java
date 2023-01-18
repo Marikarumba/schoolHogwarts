@@ -1,5 +1,7 @@
 package ru.hogwarts.school.service;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +71,20 @@ public class StudentService {
     public Collection<Student> getLastStudent() {
         logger.info("the following method was called: getLastStudent");
         return studentRepository.findLastStudents();
+    }
+
+
+    public List<String> getSortedNameStudent() {
+        return studentRepository.findAll().stream().
+                map(s -> s.getName().toUpperCase()).
+                sorted().collect(Collectors.toList());
+    }
+
+    public double getAvgAge() {
+        return studentRepository.findAll().stream().
+                mapToDouble(Student::getAge).
+                average().
+                getAsDouble();
     }
 }
 
