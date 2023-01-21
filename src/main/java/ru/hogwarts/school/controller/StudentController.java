@@ -79,15 +79,23 @@ public class StudentController {
         return studentService.getLastStudent();
     }
 
-    @GetMapping("/NameSorted")
+    @GetMapping("/nameSorted")
     public Collection<String> getSortedNameStudent() {
         return studentService.getSortedNameStudent();
     }
 
-    @GetMapping("/AvgeAge")
+    @GetMapping("/avgAge")
     public Double getAverageAge() {
         return studentService.getAvgAge();
     }
 
+    @GetMapping("/studentTread")
+    public void getStudentThread() {
+        studentService.getStudentThread();
+    }
+    @GetMapping("/studentSyn")
+    public void getStudentSyn() {
+        studentService.getStudentSyn();
+    }
 
 }

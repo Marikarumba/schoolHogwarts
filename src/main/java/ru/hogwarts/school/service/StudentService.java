@@ -86,6 +86,34 @@ public class StudentService {
                 average().
                 getAsDouble();
     }
+
+    public void getStudentThread() {
+        List<Student> students = studentRepository.findAll();
+        new Thread(() -> {
+            System.out.println(students.get(0));
+            System.out.println(students.get(1));
+        }).start();
+        new Thread(() -> {
+            System.out.println(students.get(2));
+            System.out.println(students.get(3));
+        }).start();
+        new Thread(() -> {
+            System.out.println(students.get(4));
+            System.out.println(students.get(5));
+        }).start();
+    }
+
+    public void getStudentSyn() {
+        List<Student> students = studentRepository.findAll();
+        printStudentSyn(students,0,1);
+        new Thread(() -> printStudentSyn(students, 2, 3)).start();
+        new Thread(() -> printStudentSyn(students, 4, 5)).start();
+    }
+
+    public synchronized void printStudentSyn(List<Student> students, int index1, int index2) {
+        System.out.println(students.get(index1));
+        System.out.println(students.get(index1));
+    }
 }
 
 
